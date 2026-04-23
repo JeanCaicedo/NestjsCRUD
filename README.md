@@ -1,99 +1,138 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestjsCRUD
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST de aprendizaje que implementa un CRUD de productos con NestJS 10, Prisma y SQLite. Incluye DTOs, manejo de errores de Prisma y estructura de testing generada por el CLI de Nest.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![NestJS](https://img.shields.io/badge/NestJS%2010-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 
-## Description
+## Estado del proyecto
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Proyecto de aprendizaje con un CRUD completo y funcional para la entidad `Product`. El paquete en `package.json` se llama `restapi-backend` y la licencia es `UNLICENSED`. El archivo SQLite (`prisma/dev.db`) vive en el repo como parte del entorno de desarrollo.
 
-## Project setup
+## Stack
 
-```bash
-$ npm install
-```
+- Framework: NestJS 10 (`@nestjs/common`, `@nestjs/core`, `@nestjs/platform-express`, `@nestjs/mapped-types`)
+- Lenguaje: TypeScript 5.1
+- ORM: Prisma 6 con `@prisma/client`
+- BD: SQLite (configurable vía `DATABASE_URL`)
+- Testing: Jest 29 + Supertest
+- Tooling: ESLint 8, Prettier 3
 
-## Compile and run the project
+## Requisitos previos
+
+- Node.js >= 18
+- npm
+
+## Instalación
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/JeanCaicedo/NestjsCRUD.git
+cd NestjsCRUD
+npm install
 ```
 
-## Run tests
+## Variables de entorno
+
+Crea un archivo `.env` con:
+
+- `DATABASE_URL` — cadena de conexión de Prisma. Para SQLite local: `file:./dev.db`.
+
+## Base de datos
 
 ```bash
-# unit tests
-$ npm run test
+# Aplicar migraciones en desarrollo
+npx prisma migrate dev
 
-# e2e tests
-$ npm run test:e2e
+# Generar el cliente de Prisma
+npx prisma generate
 
-# test coverage
-$ npm run test:cov
+# Explorar datos con Prisma Studio
+npx prisma studio
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Ejecución
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+# Desarrollo con recarga en caliente
+npm run start:dev
+
+# Producción
+npm run build
+npm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Por defecto el servidor queda en `http://localhost:3000`.
 
-## Resources
+## Scripts disponibles
 
-Check out a few resources that may come in handy when working with NestJS:
+| Script | Descripción |
+| --- | --- |
+| `start` | Arranca la aplicación |
+| `start:dev` | Arranca en modo watch |
+| `start:debug` | Arranca con `--debug --watch` |
+| `start:prod` | Ejecuta el build compilado (`dist/main`) |
+| `build` | Compila el proyecto con `nest build` |
+| `format` | Aplica Prettier sobre `src/` y `test/` |
+| `lint` | Corre ESLint con `--fix` |
+| `test` | Ejecuta tests unitarios con Jest |
+| `test:cov` | Jest con cobertura |
+| `test:e2e` | Ejecuta tests end-to-end |
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Modelo de datos
 
-## Support
+```prisma
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  price       Float
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Endpoints
 
-## Stay in touch
+Recurso `products` persistido vía Prisma:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+| Método | Ruta | Descripción |
+| --- | --- | --- |
+| POST | `/products` | Crea un producto (body tipo `CreateProductDto`). Responde 409 si el `name` está duplicado (código Prisma `P2002`) |
+| GET | `/products` | Lista todos los productos |
+| GET | `/products/:id` | Obtiene un producto por id (404 si no existe) |
+| PATCH | `/products/:id` | Actualiza un producto (body tipo `UpdateProductDto`) |
+| DELETE | `/products/:id` | Elimina un producto |
 
-## License
+`CreateProductDto` se deriva del modelo Prisma como `Omit<Product, 'id' | 'createdAt' | 'updatedAt'>` y `UpdateProductDto` lo extiende como parcial.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Estructura del proyecto
+
+```
+src/
+├── app.module.ts
+├── main.ts
+├── prisma/
+│   └── prisma.service.ts
+└── products/
+    ├── dto/
+    │   ├── create-product.dto.ts
+    │   └── update-product.dto.ts
+    ├── entities/
+    │   └── product.entity.ts
+    ├── products.controller.ts
+    ├── products.controller.spec.ts
+    ├── products.module.ts
+    ├── products.service.ts
+    └── products.service.spec.ts
+prisma/
+└── schema.prisma
+test/                          # Tests e2e
+```
+
+## Autor
+
+Jean Caicedo — [@JeanCaicedo](https://github.com/JeanCaicedo)
